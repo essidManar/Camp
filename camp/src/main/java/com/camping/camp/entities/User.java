@@ -1,16 +1,19 @@
 package com.camping.camp.entities;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+
+@Getter
+@Setter
 @Entity
-@Data
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "userid", updatable = false, nullable = false)
     private Long userID;
 
     private String name;

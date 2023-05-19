@@ -1,7 +1,6 @@
 com\camping\camp\entities\category.class
 com\camping\camp\entities\products.class
 com\camping\camp\entities\complaint.class
-com\camping\camp\ServletInitializer.class
 com\camping\camp\entities\campCenter.class
 com\camping\camp\entities\Forum.class
 com\camping\camp\entities\User.class
