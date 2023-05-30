@@ -1,13 +1,11 @@
 package com.camping.camp.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.Date;
+import javax.persistence.*;
+import java.time.Instant;
 
 @Getter
 @Setter
@@ -18,7 +16,12 @@ public class Commentaire {
     private Long idCom;
 
     private String content;
-    private Date date_creation;
-    private Date date_modif;
+    private Instant date_creation;
+    private Instant date_modif;
     private String username;
+
+    @ManyToOne
+    @JsonIgnore
+    private Publication publication;
+
 }
