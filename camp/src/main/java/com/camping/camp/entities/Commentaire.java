@@ -19,6 +19,8 @@ public class Commentaire {
     private Instant date_creation;
     private Instant date_modif;
     private String username;
+    private int likes;
+    private int dislikes;
 
     @ManyToOne
     @JsonIgnore
