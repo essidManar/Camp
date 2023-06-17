@@ -37,6 +37,23 @@ public class CommentaireServiceImp {
         Commentaire com = commentaireRepository.findById(id).orElseThrow();
         return mapFromComToDto(com);
     }
+    public Commentaire likeComment( Long id) {
+        Commentaire com = commentaireRepository.findById(id).orElseThrow();
+        if (com != null) {
+            com.setLikes(com.getLikes() + 1);
+        }
+
+        return  commentaireRepository.save(com);
+    }
+
+
+    public Commentaire dislikeComment(Long id) {
+        Commentaire com = commentaireRepository.findById(id).orElseThrow();
+        if (com != null) {
+            com.setDislikes(com.getDislikes() + 1);
+        }
+        return commentaireRepository.save(com);
+    }
 
     private CommentaireDto mapFromComToDto(Commentaire commentaire) {
         CommentaireDto comDto = new CommentaireDto();
@@ -55,6 +72,8 @@ public class CommentaireServiceImp {
         com.setDate_creation(Instant.now());
         //pub.setUsername(loggedInUser.getUsername());
         com.setDate_modif(Instant.now());
+        com.setLikes(com.getLikes());
+        com.setDislikes(commentDto.getDislikes());
         return com;
     }
 }

@@ -6,6 +6,9 @@ public class CommentaireDto {
     private String content;
     private String username;
 
+    private int likes;
+    private int dislikes;
+
     public Long getIdCom() {
         return idCom;
     }
@@ -28,5 +31,21 @@ public class CommentaireDto {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
+    public int getDislikes() {
+        return dislikes;
+    }
+
+    public void setDislikes(int dislikes) {
+        this.dislikes = dislikes;
     }
 }

@@ -32,5 +32,15 @@ public class CommentaireController {
     public ResponseEntity<CommentaireDto> getSingleComment(@PathVariable @RequestBody Long id) {
         return new ResponseEntity<>(commentaireServiceImp.readSingleCom(id), HttpStatus.OK);
     }
+    @PutMapping("/{id}/like")
+    public ResponseEntity<CommentaireDto> like (@PathVariable Long id) {
+        commentaireServiceImp.likeComment(id);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+    @PutMapping("/{id}/dislike")
+    public ResponseEntity<CommentaireDto> dislike (@PathVariable Long id) {
+        commentaireServiceImp.dislikeComment(id);
+        return new ResponseEntity(HttpStatus.OK);
+    }
 
 }
