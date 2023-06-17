@@ -4,7 +4,7 @@ package com.camping.camp.dto;
 public class CommentaireDto {
     private Long idCom;
     private String content;
-    private String username;
+
 
     private int likes;
     private int dislikes;
@@ -25,13 +25,6 @@ public class CommentaireDto {
         this.content = content;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public int getLikes() {
         return likes;

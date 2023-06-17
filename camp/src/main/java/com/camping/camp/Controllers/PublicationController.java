@@ -19,15 +19,15 @@ public class PublicationController {
 @Autowired
     private PublicationServiceImp publicationServiceImp ;
 
-    @PostMapping
-    public ResponseEntity createPub(@RequestBody PublicationDto  pubDto) {
+    @PostMapping("/{id}")
+    public ResponseEntity createPub(@RequestBody PublicationDto  pubDto,@PathVariable("id")Long userId) {
         List<TitleDto> existingTitles = publicationServiceImp.showAllTitle();
         for (TitleDto existingTitle : existingTitles)
             if (publicationServiceImp.compareTitles(existingTitle,pubDto,80)){
-                
+
                 return ResponseEntity.badRequest().body("Title is too similar to an existing title");
             }
-        publicationServiceImp.createPub(pubDto);
+        publicationServiceImp.createPub(pubDto,userId);
         return ResponseEntity.ok("Title created successfully");
 
     }

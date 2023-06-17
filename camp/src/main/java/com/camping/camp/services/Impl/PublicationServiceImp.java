@@ -3,7 +3,9 @@ package com.camping.camp.services.Impl;
 import com.camping.camp.dto.PublicationDto;
 import com.camping.camp.dto.TitleDto;
 import com.camping.camp.entities.Publication;
+import com.camping.camp.entities.User;
 import com.camping.camp.repositories.PublicationRepository;
+import com.camping.camp.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,8 @@ public class PublicationServiceImp {
 
     @Autowired
     private PublicationRepository publicationRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     public List<PublicationDto> showAllPubs() {
         List<Publication> posts = publicationRepository.findAll();
@@ -26,8 +30,10 @@ public class PublicationServiceImp {
         return posts.stream().map(this::mapFromPubToTitle).collect(toList());
     }
 
-    public void createPub(PublicationDto pubDto) {
+    public void createPub(PublicationDto pubDto,Long userID) {
+        User user=userRepository.findById(userID).orElse(null);
         Publication pub = mapFromDtoToPub(pubDto);
+        pub.setUser(user);
         publicationRepository.save(pub);
     }
 

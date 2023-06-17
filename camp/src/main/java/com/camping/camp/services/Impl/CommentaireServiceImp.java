@@ -4,8 +4,10 @@ import com.camping.camp.dto.CommentaireDto;
 import com.camping.camp.dto.PublicationDto;
 import com.camping.camp.entities.Commentaire;
 import com.camping.camp.entities.Publication;
+import com.camping.camp.entities.User;
 import com.camping.camp.repositories.CommentaireRepository;
 import com.camping.camp.repositories.PublicationRepository;
+import com.camping.camp.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,8 @@ public class CommentaireServiceImp {
     private CommentaireRepository commentaireRepository;
     @Autowired
     private PublicationRepository publicationRepository;
+    @Autowired
+    private UserRepository userRepository;
 
 
     public List<CommentaireDto> showAllComs() {
@@ -27,10 +31,12 @@ public class CommentaireServiceImp {
         return com.stream().map(this::mapFromComToDto).collect(toList());
     }
 
-    public void createCom(CommentaireDto comDto,Long idPub) {
+    public void createCom(CommentaireDto comDto,Long idPub,Long userID) {
+        User user=userRepository.findById(userID).orElse(null);
         Publication pub=publicationRepository.findById(idPub).orElse(null);
         Commentaire com = mapFromDtoToCom(comDto);
         com.setPublication(pub);
+        com.setUser(user);
         commentaireRepository.save(com);
     }
     public CommentaireDto readSingleCom(Long id) {
@@ -59,7 +65,6 @@ public class CommentaireServiceImp {
         CommentaireDto comDto = new CommentaireDto();
         comDto.setIdCom(commentaire.getIdCom());
         comDto.setContent(commentaire.getContent());
-        comDto.setUsername(commentaire.getUsername());
         return comDto;
     }
 
@@ -67,7 +72,6 @@ public class CommentaireServiceImp {
         Commentaire com = new Commentaire();
         com.setIdCom(commentDto.getIdCom());
         com.setContent(commentDto.getContent());
-        com.setUsername(commentDto.getUsername());
         //User loggedInUser = authService.getCurrentUser().orElseThrow(() -> new IllegalArgumentException("User Not Found"));
         com.setDate_creation(Instant.now());
         //pub.setUsername(loggedInUser.getUsername());

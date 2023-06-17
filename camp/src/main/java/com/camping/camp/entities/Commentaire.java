@@ -18,12 +18,14 @@ public class Commentaire {
     private String content;
     private Instant date_creation;
     private Instant date_modif;
-    private String username;
     private int likes;
     private int dislikes;
 
     @ManyToOne
     @JsonIgnore
     private Publication publication;
+    @ManyToOne
+    @JsonIgnore
+    private User user;
 
 }

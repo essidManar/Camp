@@ -17,9 +17,9 @@ public class CommentaireController {
     @Autowired
     private CommentaireServiceImp commentaireServiceImp ;
 
-    @PostMapping("/{id}")
-    public ResponseEntity createComment(@RequestBody CommentaireDto comDto,@PathVariable("id")Long idPub) {
-        commentaireServiceImp.createCom(comDto,idPub);
+    @PostMapping("/{id}/{idUser}")
+    public ResponseEntity createComment(@RequestBody CommentaireDto comDto,@PathVariable("id")Long idPub,@PathVariable("idUser")Long idUser) {
+        commentaireServiceImp.createCom(comDto,idPub,idUser);
         return new ResponseEntity(HttpStatus.OK);
     }
 

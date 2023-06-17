@@ -26,5 +26,8 @@ public class Publication {
     @JsonIgnore
     @OneToMany(mappedBy = "publication" , cascade=CascadeType.ALL , fetch = FetchType.EAGER)
     private Set<Commentaire> Commentaires;
+    @ManyToOne
+    @JsonIgnore
+    private User user;
 
 }
