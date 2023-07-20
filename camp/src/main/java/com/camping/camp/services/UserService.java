@@ -7,6 +7,7 @@ import com.camping.camp.entities.User;
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -18,4 +19,8 @@ public interface UserService {
     Optional<User> findUserById(Long id);
 
     LocalUser processUserRegistration(String registrationId, Map<String, Object> attributes, OidcIdToken idToken, OidcUserInfo userInfo);
+     List<User> getAllUsers () ;
+    User getUserById(Long id);
+    User saveUser(User user);
+    void deleteUser(Long id);
 }
